@@ -1,0 +1,57 @@
+<div class="post">
+    <div class="card">
+        <div class="card-header">
+            <h2>
+                {{post.title}}
+            </h2>
+        </div>
+        <div class="card-body">
+            {{post.body}}
+        </div>
+        <div class="author">
+            Posted by {{post.User.username}} on {{post.format_date createdAt}}
+        </div>
+    </div>
+
+    {{#if post.Comments}}
+    <div class="card">
+      <div class="card-header">
+        <h3>Comments</h3>
+      </div>
+
+      <div class="card-body">
+        {{#each post.Comments}}
+          <div>
+            <p>
+              {{body}}
+            </p>
+            <p>
+                {{User.username}}, {{format_date createdAt}}
+            </p>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    <form id="new-comment-form" class="card">
+        <div class="card-header">
+            <h3>
+                Add New Comment
+            </h3>
+        </div>
+
+        <div class="card-body">
+            <input type="hidden" name="post-id" value="{{post.id}}" />
+
+            <label class="form-label" for="comment-body">Comment</label>
+
+            <textarea name="comment-body" class="form-input"></textarea>
+
+            <button type="submit" class="btn">Submit</button>
+        </div>    
+    </div>
+  </form>
+</div>
+
+<script src="/js/comment.js"></script>
